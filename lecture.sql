@@ -1,3 +1,5 @@
+-- day 1
+
 -- basic
 select * from albums;
 
@@ -127,3 +129,32 @@ limit 5;
 -- what artist has sold the most tracks
 
 -- list the customers that listen to the Latin genre
+
+
+
+
+-- day 2
+
+-- this is a comment
+
+select upper(title) || lower(' ROCKS!') as 'Big Title' from albums;
+
+select cast(round(unitprice,1) as int) as WholeDollar from tracks;
+
+select coalesce(composer, 'Default Value') from tracks;
+
+select a.Title, count(*) as Tracks, sum(t.bytes) /1000000 as SizeMB
+from tracks t
+inner join albums a on a.albumid = t.albumid
+group by t.albumid
+having SizeMB between 50 and 70
+order by SizeMB desc
+limit 5;
+
+select albumid, title
+from albums
+where albumid in (1,2,3);
+
+select name
+from tracks
+where genreid in (select genreid from genres where name = 'Latin');
